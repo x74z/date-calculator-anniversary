@@ -11,10 +11,9 @@
   "scripts": {
     "build": "webpack",
     "dev": "webpack serve",
-    "predeploy": "git push && git checkout gh-pages && git merge main --no-edit && npm run build && git add dist -f && git commit -m 'Deployment commit'",
-    "deploy": "git subtree push --prefix dist origin gh-pages",
+    "predeploy": "bash -c '[ $(git branch --list gh-pages) ] || git branch gh-pages'",
+    "deploy": "git push && git checkout gh-pages && git merge main --no-edit && npm run build && git add dist -f && git commit -m 'Deployment commit' && git subtree push --prefix dist origin gh-pages",
     "postdeploy": "git checkout main"
-
   },
   "dependencies": {
     "date-fns": "^4.1.0"
